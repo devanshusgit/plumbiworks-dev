@@ -75,10 +75,11 @@ body::before {
     box-shadow: 0 10px 24px rgba(23, 118, 210, 0.16);
 }
 
-.brand-text {
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -0.03em;
+.brand-logo-full {
+    width: 220px;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .nav {
@@ -399,6 +400,11 @@ body::before {
     .brand-logo {
         width: 42px;
         height: 42px;
+    }
+
+    .brand-logo-full {
+        width: 180px;
+        height: auto;
     }
 }
 
