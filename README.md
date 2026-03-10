@@ -1,6 +1,6 @@
-# PlumbiWorks Dev
+# Plumblink Works Dev
 
-Static business website for Plumblink Works / PlumbiWorks.
+Static business website for Plumblink Works.
 
 ## Structure
 - index.html
