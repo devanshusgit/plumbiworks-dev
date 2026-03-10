@@ -53,10 +53,6 @@ body::before {
     justify-content: space-between;
     align-items: center;
     padding: 22px 0;
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    backdrop-filter: blur(14px);
 }
 
 .brand-link {
