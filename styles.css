@@ -19,6 +19,17 @@
     --max-width: 1200px;
 }
 
+[data-theme="dark"] {
+    --bg: #0d1117;
+    --surface: rgba(22, 30, 46, 0.88);
+    --text: #e8edf5;
+    --muted: #8b95a8;
+    --line: rgba(255, 255, 255, 0.08);
+    --primary: #4a9eed;
+    --primary-dark: #6db4f5;
+    --shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background:
@@ -28,6 +39,15 @@ body {
     color: var(--text);
     min-height: 100vh;
     line-height: 1.5;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] body,
+[data-theme="dark"] {
+    background:
+        radial-gradient(circle at top left, rgba(23, 118, 210, 0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(95, 173, 255, 0.06), transparent 35%),
+        linear-gradient(180deg, #0d1117 0%, #0f1923 100%);
 }
 
 body::before {
@@ -716,4 +736,111 @@ address {
     .form-card {
         padding: 24px;
     }
+}
+
+/* ============================================================
+   THEME TOGGLE BUTTON
+   ============================================================ */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--text);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* Show sun icon in dark mode, moon icon in light mode */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
+/* On mobile, theme-toggle inside nav stays visible when nav is open */
+@media (max-width: 720px) {
+    .theme-toggle {
+        width: 100%;
+        border-radius: 0;
+        background: none;
+        border: none;
+        border-bottom: 1px solid var(--line);
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 10px 4px;
+    }
+
+    .theme-toggle::after {
+        content: attr(data-label);
+    }
+}
+
+/* ============================================================
+   DARK MODE — surface & card overrides
+   ============================================================ */
+[data-theme="dark"] .showcase-card.light {
+    background: linear-gradient(180deg, rgba(22,30,46,0.9), rgba(15,25,40,0.98));
+}
+
+[data-theme="dark"] .nav-cta {
+    background: rgba(255,255,255,0.08);
+    color: var(--text) !important;
+}
+
+[data-theme="dark"] .btn-secondary {
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+}
+
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .form-group input::placeholder,
+[data-theme="dark"] .form-group textarea::placeholder {
+    color: #5a6478;
+}
+
+[data-theme="dark"] .site-header.scrolled {
+    background: rgba(13, 17, 23, 0.88);
+}
+
+/* ============================================================
+   MAP DIRECTIONS LINK
+   ============================================================ */
+.map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    color: #5fadff;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.map-link:hover {
+    color: #8ec8ff;
+    text-decoration: underline;
 }

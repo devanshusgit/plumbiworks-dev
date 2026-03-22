@@ -14,6 +14,37 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ----------------------------------------------------------
+     0. Dark / Light theme toggle
+  ---------------------------------------------------------- */
+  const themeToggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+
+  // Apply saved theme on load
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    html.setAttribute('data-theme', 'dark');
+  }
+
+  function updateThemeLabel() {
+    if (themeToggle) {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      themeToggle.setAttribute('data-label', isDark ? 'Light mode' : 'Dark mode');
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+  }
+
+  updateThemeLabel();
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      updateThemeLabel();
+    });
+  }
+
+  /* ----------------------------------------------------------
      1. Sticky header — add .scrolled class on scroll
   ---------------------------------------------------------- */
   const header = document.querySelector('.site-header');
@@ -68,7 +99,7 @@
       menuToggle.classList.toggle('is-open', isOpen);
     });
 
-    // Close menu when a nav link is clicked
+    // Close menu when a nav anchor link is clicked (not the theme toggle button)
     nav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         nav.classList.remove('nav-open');
